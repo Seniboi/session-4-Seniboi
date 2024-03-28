@@ -37,18 +37,30 @@ init =
 
 
 type Msg
-  = Increment
-  | Decrement
+  = Decrement
+  | Increment
+  | Reset
+  | Increment10
+  | Decrement10
 
 
 update : Msg -> Model -> Model
 update msg model =
   case msg of
-    Increment ->
-      model + 1
-
     Decrement ->
       model - 1
+
+    Increment ->
+      model + 1
+      
+    Increment10 ->
+      model + 10
+      
+    Decrement10 ->
+      model - 10
+      
+    Reset ->
+      0
 
 
 
@@ -58,7 +70,10 @@ update msg model =
 view : Model -> Html Msg
 view model =
   div []
-    [ button [ onClick Decrement ] [ text "-" ]
+    [ button [ onClick Increment ] [ text "+" ]
+    , button [ onClick Increment10] [text "+10"]
     , div [] [ text (String.fromInt model) ]
-    , button [ onClick Increment ] [ text "+" ]
+    , button [ onClick Decrement ] [ text "–" ]
+    , button [ onClick Decrement10] [text "-10"]
+    , div[] [button [ onClick Reset] [ text "Reset"]]
     ]
